@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <title>Docs</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,500;1,500&display=swap');
+            
+            *{
+                box-sizing: border-box;
+                font-family: "Jost", serif;
+                font-optical-sizing: auto;
+            }
+            html{
+                margin: 0;
+                font-size: 16px;
+                height: 100dvh;
+            }
+            body{
+                margin: 0;
+                background-color: #ddd;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+            .header{
+                flex: 0 1 auto;
+                padding: 0 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .doc-info{
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                height: 2.5rem;
+                align-items: center;
+                justify-content: space-between;
+				margin-top: 5px;
+            }
+
+			.doc-info > div{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+
+			ul{
+				margin: 0;
+				padding: 0;
+				text-align: center;
+			}
+
+			.doc-info > ul > li{
+				margin-left: 8px;
+				border-radius: 10px;
+				padding: 3px 13px;
+				background-color: rgb(182, 182, 182);
+			}
+
+			.doc-info > ul > li:hover{
+				background-color: rgb(202, 202, 202);
+			}
+
+			ul li {
+				list-style: none;
+				display: inline-block;
+				position: relative;
+				text-decoration: none;
+				
+			}
+
+			li a {
+				color: black;
+			}
+
+			li:hover {
+				cursor: pointer;
+			}
+
+			ul li:hover > ul,
+			ul li ul:hover {
+				visibility: visible;
+				opacity: 1;
+				display: block;
+				min-width: 160px;
+				text-align: left;
+			}
+
+			.dropdown {
+				visibility: hidden;
+				opacity: 0;
+				display: none;
+				position: absolute;
+				padding-left: 0;
+				left: 0;
+				margin-top: 4px;
+			}
+
+			.dropdown li {
+				clear: both;
+				width: 100%;
+				text-align: left;
+				border-style: none;
+				padding: 3px 13px;
+				background-color: rgb(182, 182, 182);
+			}
+
+			.dropdown li:first-child{
+				border-top-left-radius: 10px;
+				border-top-right-radius: 10px;
+				border-bottom: 1px solid #272727;
+			}
+
+			.dropdown li:last-child{
+				border-bottom-left-radius: 10px;
+				border-bottom-right-radius: 10px;
+			}
+
+			.dropdown li:hover {
+				background-color: rgb(202, 202, 202);
+			}
+
+			.dropdown li a { transition: all 0.5s ease; }
+
+			a {
+				text-decoration: none;
+			}
+
+			.tools{
+                background-color: rgba(255,255,255,0.6);
+                width: 850px;
+                max-width: 90%;
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				justify-content: left;
+				margin-top: 5px;
+				border-radius: 20px;
+				gap: 1rem;
+				padding: 3px 15px;
+            }
+
+			.tools > div{
+				display: flex;
+				flex-direction: row;
+				gap: 10px;
+			}
+			
+			select{
+				border: none;
+				padding: 0px 5px;
+				border-radius: 10px;
+				font-size: 14px;
+			}
+
+			.tools ul{
+				padding-top: 5px;
+				padding-bottom: 5px;
+			}
+
+			.tools ul li{
+				border-radius: 5px;
+				text-align: center;
+				width: 25px;
+			}
+
+			.tools ul li:first-child{
+				padding-left: 0px;
+			}
+			.tools ul li:last-child{
+				padding-right: 0px;
+			}
+
+			.tools ul li:hover{
+				background-color: rgb(201, 201, 201);
+			}
+
+			.active{
+				background-color: rgb(201, 201, 201);
+			}
+
+			input[type="color"] {
+				width: 25px;
+			}
+
+			input[type="number"] {
+				-webkit-appearance: textfield;
+				-moz-appearance: textfield;
+				appearance: textfield;
+			}
+
+			input[type=number]::-webkit-inner-spin-button,
+			input[type=number]::-webkit-outer-spin-button {
+				-webkit-appearance: none;
+			}
+
+			.number-input {
+				display: inline-flex;
+			}
+
+			.number-input,
+			.number-input * {
+				box-sizing: border-box;
+			}
+
+			.number-input button {
+				all: unset;
+				outline:none;
+				-webkit-appearance: none;
+				appearance: none;
+				background-color: rgb(224, 222, 222);
+				border: none;
+				cursor: pointer;
+				margin: 0;
+				position: relative;		
+				font-size: 14px;
+				text-align: center;
+				width: 20px;
+			}
+
+			.number-input button.btn-up{
+				border-radius: 0px 10px 10px 0px;
+			}
+			
+			.number-input button.btn-down{
+				border-radius: 10px 0px 0px 10px;
+			}
+
+			.number-input input[type=number] {
+				max-width: 2.5rem;
+				padding: 3px;
+				border: solid #ddd;
+				border-width: 0 2px;
+				font-weight: bold;
+				text-align: center;
+			}
+
+			.sep::before{
+				content: "";
+				margin: 0;
+				padding: 0;
+				border-left: 1px solid rgb(161, 161, 161);
+			}
+
+            .content{
+                flex: 1 1 auto;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                padding: 20px 0;
+            }
+            .page{
+                background-color: #fff;
+                width: 850px;
+                max-width: 85%;
+                padding: 35px 40px;
+                aspect-ratio: 2480/3508; /* Folha A4 */
+				white-space: pre-wrap;
+            }
+            .page:focus{
+                outline: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <div class="doc-info">
+                <div>
+					<i class="fa-regular fa-file"></i>
+					<span id="filename-input" contenteditable="true">Nome do arquivo</span>
+				</div>
+                <ul>
+                    <li>
+						<a href="#" id="btn-salvar">Baixar <i class="fa-solid fa-caret-down"></i></a>
+                        <ul class="dropdown">
+                        	<li><a href="#">Baixar como .txt</a></li>
+                        	<li><a href="#">Baixar como .html</a></li>
+                      </ul>
+					</li>
+                    <li><a href="#">Salvar</a></li>
+                </ul>
+            </div>
+
+            <div class="tools">
+				<ul>
+					<li id="btn-undo" title="Desfazer"><i class="fa-solid fa-rotate-left"></i></li>
+					<li id="btn-copy" title="Copiar"><i class="fa-regular fa-copy"></i></li>
+					<li id="btn-paste" title="Colar"><i class="fa-regular fa-paste"></i></li>
+					<li id="btn-cut" title="Recortar"><i class="fa-solid fa-scissors"></i></li>
+				</ul>
+				<span class="sep"></span>
+				<div>
+					<select id="select-font">
+						<option value="font1">Arial</option>
+						<option value="font1">Fonte 2</option>
+						<option value="font1">Fonte 3</option>
+					</select>
+					<div class="number-input">
+						<button class="btn-down" onclick="this.parentNode.querySelector('input[type=number]').stepDown()"><i class="fa-solid fa-minus"></i></button>
+						<input id="input-size" class="quantity" min="0" name="quantity" value="12" type="number">
+						<button class="btn-up" onclick="this.parentNode.querySelector('input[type=number]').stepUp()"><i class="fa-solid fa-plus"></i></button>
+					</div>
+				</div>
+				<span class="sep"></span>
+                <ul>
+					<input id="select-color" title="Cor do texto" type="color" onchange="changeColor()" > 
+					<li id="btn-bold" title="Negrito" onclick="formatarTexto('bold');"><i class="fa-solid fa-bold"></i></li>
+					<li id="btn-italic" title="Itálico" onclick="formatarTexto('italic');"><i class="fa-solid fa-italic"></i></li>
+					<li id="btn-underline" title="Sublinhado" onclick="formatarTexto('underline')"><i class="fa-solid fa-underline"></i></li>
+				</ul>
+				<span class="sep"></span>
+				<ul>
+					<li id="btn-align-left" class="active" title="Alinhar à esquerda"><i class="fa-solid fa-align-left"></i></li>
+					<li id="btn-align-center" title="Alinhar ao centro"><i class="fa-solid fa-align-center"></i></li>
+					<li id="btn-align-right" title="Alinhar à direita"><i class="fa-solid fa-align-right"></i></li>
+					<li id="btn-align-justify" title="Alinhar justicado"><i class="fa-solid fa-align-justify"></i></li>
+				</ul>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="page" contenteditable="true"></div>
+        </div>
+
+		<script>
+			const page = document.querySelector('.page');
+			page.addEventListener('keydown', function(event){
+				if(event.key === "Tab"){
+					event.preventDefault();
+					document.execCommand('insertHTML', false, '&#009');
+				}
+			});
+			page.addEventListener("focusout", function () { 
+            	salvarSelecao();
+        	});
+
+			let range = null;
+			function salvarSelecao() {
+        		if (window.getSelection)	// Para navegadores não baseados no IE
+        		{
+            		range = window.getSelection().getRangeAt(0);
+        		}
+				else if (document.selection) // Para IE
+				{
+					range = document.selection.createRange();
+				}
+			}
+
+			function restaurarSelecao() {
+				page.focus();
+				if (range != null) {
+					if (window.getSelection) // Para navegadores não baseados no IE, e existindo alguma seleção
+					{
+						var selecao = window.getSelection();
+						if (selecao.rangeCount > 0)
+							selecao.removeAllRanges();
+						selecao.addRange(range);
+					}
+					else if (document.createRange) // Para navegadores não baseados no IE, e sem nenhuma seleção
+					{
+						window.getSelection().addRange(range);
+					}
+					else if (document.selection) // Para IE
+					{
+						range.select();
+					}
+				}
+			}
+	
+			function formatarTexto(comando, opcional) {
+				restaurarSelecao();
+				document.execCommand(comando, false, opcional);
+			}
+
+
+
+			/*document.querySelector('#btn-copy').addEventListener('click', function() {
+				const selection = window.getRangeAt(0);
+				
+				selection
+
+				// Copiar o texto selecionado
+				navigator.clipboard.writeText("")
+					.then(() => {
+						alert("Texto copiado!");
+						
+						// Restaurar a seleção após a cópia
+						selection.removeAllRanges();
+						selection.addRange(range);
+					})
+					.catch(err => console.error("Erro ao copiar:", err));
+			});*/
+
+			let atualAlinhamento = document.querySelector('#btn-align-left');
+
+			document.querySelector('#btn-align-left').addEventListener('click', function(event) {
+				atualAlinhamento.classList.toggle('active');
+				this.classList.toggle('active');
+				atualAlinhamento = this;
+				page.style.textAlign = "left";
+
+			});
+			document.querySelector('#btn-align-center').addEventListener('click', function() {
+				atualAlinhamento.classList.toggle('active');
+				this.classList.toggle('active');
+				atualAlinhamento = this;
+				page.style.textAlign = "center";
+			});
+			document.querySelector('#btn-align-right').addEventListener('click', function() {
+				atualAlinhamento.classList.toggle('active');
+				this.classList.toggle('active');
+				atualAlinhamento = this;
+				page.style.textAlign = "right";
+			});
+			document.querySelector('#btn-align-justify').addEventListener('click', function() {
+				atualAlinhamento.classList.toggle('active');
+				this.classList.toggle('active');
+				atualAlinhamento = this;
+				page.style.textAlign = "justify";
+			});
+		</script>
+    </body>
+</html>
